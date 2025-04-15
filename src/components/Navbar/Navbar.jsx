@@ -12,15 +12,21 @@ export default function Navbar() {
                 <h1>MovieApp</h1>
             </div>
             <div className="center">
-                <PiFilmReelFill />
+                <NavLink to="/">
+                    <PiFilmReelFill />
+                </NavLink>
             </div>
             <div className="right">
                 <ul>
                     <li>
-                        <TiHome />
+                        <NavLink to="/home">
+                            <TiHome />
+                        </NavLink>
                     </li>
                     <li>
-                        <FaHeart />
+                        <NavLink to="/my-list">
+                            <FaHeart />
+                        </NavLink>
                     </li>
                 </ul>
             </div>
