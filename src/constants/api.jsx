@@ -1,3 +1,3 @@
-const API_KEY = import.meta.env.API_KEY;
-const API_READ_JETON = import.meta.env.API_READ_JETON;
-const API_GENRE = import.meta.env.API_GENRE;
+export const API_KEY = import.meta.env.VITE_API_KEY;
+export const API_READ_JETON = import.meta.env.VITE_API_READ_JETON;
+export const API_GENRE = import.meta.env.VITE_API_GENRE;
