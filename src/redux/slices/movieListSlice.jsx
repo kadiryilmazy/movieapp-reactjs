@@ -5,6 +5,7 @@ import { API_MOVIE_LIST, API_KEY } from "../../constants/api";
 
 const initialState = {
     movieList: [],
+    isLoading: false,
 };
 
 export const getMovieList = createAsyncThunk("getMovieList", async () => {
@@ -17,7 +18,11 @@ const movieListSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        builder.addCase(getMovieList.pending, (state, action) => {
+            state.isLoading = true;
+        });
         builder.addCase(getMovieList.fulfilled, (state, action) => {
+            state.isLoading = false;
             state.movieList = action.payload;
         });
     },
