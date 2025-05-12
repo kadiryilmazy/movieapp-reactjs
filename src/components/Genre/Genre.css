@@ -1,24 +1,38 @@
 .genres {
-    height: 30px;
+    height: 40px;
     padding: 5px 30px;
     display: flex;
     align-items: center;
     color: #dedede;
     font-family: "Roboto", sans-serif;
     font-weight: 700;
+    overflow-x: auto; /* Scroll aktif */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox için gizle */
+}
+
+.genres::-webkit-scrollbar {
+    display: none; /* Chrome, Safari için gizle */
 }
 
 .genres ul {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: nowrap; /* ALT SATIRA GEÇMESİN */
+    gap: 15px;
+    width: max-content; /* UL, içerik kadar genişlesin */
+    padding: 0;
+    margin: 0;
 }
 
 .genres ul li {
+    list-style: none;
     cursor: pointer;
     font-size: 13px;
     transition: all 0.3s;
+    padding-left: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .genres ul li:hover {
@@ -33,4 +47,10 @@
     padding: 5px 10px;
     border-radius: 5px;
     transition: all 0.3s;
+}
+
+.genre-item.active {
+    color: #ffcc00;
+    font-weight: 600;
+    font-size: 105%;
 }

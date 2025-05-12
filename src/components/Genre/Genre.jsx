@@ -3,9 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGenres } from "../../redux/slices/genreSlice";
 import "./Genre.css";
 
-export default function Genre() {
+export default function Genre({ setSelectedGenre, selectedGenre }) {
     const dispatch = useDispatch();
     const genres = useSelector((state) => state.genre.genres);
+
+    const handleGenre = (genre) => {
+        setSelectedGenre(genre);
+    };
     useEffect(() => {
         dispatch(getGenres());
     }, [dispatch]);
@@ -13,11 +17,12 @@ export default function Genre() {
     return (
         <div className="genres">
             <ul>
-                {genres &&
-                    genres.map((genre, index) => (
+                {Array.isArray(genres) &&
+                    genres.map((genre) => (
                         <li
-                            key={index}
-                            className="genre-item"
+                            key={genre.id}
+                            onClick={() => handleGenre(genre)}
+                            className={`genre-item ${selectedGenre?.id === genre.id ? "active" : ""}`}
                         >
                             {genre.name}
                         </li>

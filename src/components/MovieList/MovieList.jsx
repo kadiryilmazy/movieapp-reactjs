@@ -1,32 +1,38 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovieList } from "../../redux/slices/movieListSlice";
+import { getMovieList, getMovieListByGenre } from "../../redux/slices/movieListSlice";
 import MovieCard from "../MovieCard/MovieCard";
 import "./MovieList.css";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
-export default function MovieList() {
+export default function MovieList({ selectedGenre }) {
     const dispatch = useDispatch();
-    const { movieList, isLoading } = useSelector((store) => store.movieList);
+    const { movieList, status, error } = useSelector((store) => store.movieList);
 
     useEffect(() => {
-        dispatch(getMovieList());
-    }, [dispatch]);
+        if (!selectedGenre) {
+            dispatch(getMovieList());
+        } else {
+            dispatch(getMovieListByGenre(selectedGenre.id));
+        }
+    }, [selectedGenre, dispatch]);
 
     return (
         <div className="movie-list">
             <ul>
-                {isLoading ? (
-                    <Loading />
-                ) : (
-                    movieList &&
-                    movieList.map((movie, index) => (
+                {status === "fulfilled" ? (
+                    movieList.map((movie) => (
                         <MovieCard
-                            key={movie.id || index}
+                            key={movie.id}
                             movie={movie}
                         />
                     ))
-                )}
+                ) : status === "pending" ? (
+                    <Loading />
+                ) : status === "rejected" ? (
+                    <Error error={error} />
+                ) : null}
             </ul>
         </div>
     );
