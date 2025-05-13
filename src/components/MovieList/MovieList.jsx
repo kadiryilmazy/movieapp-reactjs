@@ -20,6 +20,8 @@ export default function MovieList({ selectedGenre }) {
 
     return (
         <div className="movie-list">
+            <h1 className="genre-list__header">{selectedGenre ? selectedGenre.name : "Popular Movies"}</h1>
+
             <ul>
                 {status === "fulfilled" ? (
                     movieList.map((movie) => (
